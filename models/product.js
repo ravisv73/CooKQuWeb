@@ -6,6 +6,7 @@ const productSchema = new mongoose.Schema({
     slug: {type: String, required: true, unique: true},
     category: {type: String, required: true},
     image: {type: String, required: true},
+    recipe_url: {type: String, required: true},
     price: {type: String, required: true},
     cuisine: {type: String, required: true},
     rating: {type: String, required: true, default: 0},
@@ -16,6 +17,6 @@ const productSchema = new mongoose.Schema({
     timestamps: true
 });
 
-const Product = mongoose.model.Product || mongoose.model('Product', productSchema);
+const Product = mongoose.models.Product || mongoose.model('Product', productSchema);
 
 export default Product;

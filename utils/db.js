@@ -1,10 +1,12 @@
 import mongoose from "mongoose";
 
+
+
 const connection = {};
 
 async function connect() {
     console.log('making attempts to connect');
-    console.log("MONGO_DB_URI:"+process.env.MONGODB_URI);
+    console.log("MONGO_DB_URI: "+process.env.MONGODB_URI);
     console.log('Connection: '+ connection.isConnected);
     if (connection.isConnected) {
         console.log('already connected');
@@ -20,7 +22,7 @@ async function connect() {
     }
     
     const db = await mongoose.connect(process.env.MONGODB_URI, {
-    //const db = await mongoose.connect("mongodb://localhost:27017/local", {
+    //const db = await mongoose.connect("mongodb://localhost:27017/test", {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     });
@@ -45,6 +47,13 @@ async function disconnect() {
     }
 }
 
-const db = {connect, disconnect};
+function convertDocToObj(doc) {
+    doc._id = doc._id.toString();
+    doc.createdAt = doc.createdAt.toString();
+    doc.updatedAt = doc.updatedAt.toString();
+    return doc;
+}
+
+const db = {connect, disconnect, convertDocToObj};
 
 export default db;
