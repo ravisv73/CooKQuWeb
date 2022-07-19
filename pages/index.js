@@ -7,7 +7,7 @@ import { Card, CardActionArea, CardMedia, CardContent, CardActions, Grid, Typogr
 import data from '../utils/data';
 import { ReceiptRounded } from '@mui/icons-material'
 import db from '../utils/db'
-import Product from '../models/Product'
+import Product from '../models/product'
 
 export default function Home(props) {
   const {products} = props;

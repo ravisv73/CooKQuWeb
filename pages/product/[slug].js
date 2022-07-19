@@ -6,7 +6,7 @@ import NextLink from 'next/link'
 import { Button, Card, Grid, Link, List, ListItem, Typography } from '@material-ui/core';
 import useStyles from '../../utils/styles';
 import Image from 'next/image';
-import Product from '../../models/Product';
+import Product from '../../models/product';
 import db from '../../utils/db';
 
 
