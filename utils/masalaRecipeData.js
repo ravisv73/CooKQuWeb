@@ -3,7 +3,7 @@ const masalaRecipeData = {
     masalaRecipes: [
         {
             name: 'தலபாக்கட்டு பிரியாணி மசாலா பேக் (Pocket)',
-            slug: 'தலபாக்கட்டு-பிரியாணி-மசாலா-பேக்-Pocket',
+            slug: 'thalapakattu-briyani',
             category: 'Masala Pack',
             image: '/images/paneer_butter_masala.jpg',
             description: 'தலபாக்கட்டு பிரியாணி மசாலா பேக் (Pocket)',
