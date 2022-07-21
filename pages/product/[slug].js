@@ -7,12 +7,13 @@ import { Button, Card, Grid, Link, List, ListItem, Typography } from '@material-
 import useStyles from '../../utils/styles';
 import Image from 'next/image';
 import Product from '../../models/product';
+import MasalaRecipe from '../../models/masalarecipe';
 import db from '../../utils/db';
 
 
 export default function ProductScreen(props) {
     const router = useRouter();
-    const {product} = props;
+    const {product, masalarecipe} = props;
     const classes = useStyles();
     //const {slug} = router.query;
     //const product = data.products.find((a) => a.slug === slug);
@@ -96,7 +97,42 @@ export default function ProductScreen(props) {
                         </List>
                     </Card>
                 </Grid>
+                <Grid item md={12} xs={24}>
+                    <List>
+                        <ListItem>
+                            <Typography component="h3" variant="h3">{masalarecipe.name}</Typography>
+                        </ListItem>
+                        <ListItem>
+                            <Typography>Category: {masalarecipe.category}</Typography>
+                        </ListItem>
+                        <ListItem>
+                            <Typography>Description: {masalarecipe.description}</Typography>
+                        </ListItem>
+                        <ListItem>
+                            <Typography component="h1" variant="h1">Ingredients</Typography>
+                        </ListItem>
+                        <ListItem>
+                            <Grid>
+                                {masalarecipe.ingredients.map((ingredient) => (
+                                <Grid item md={12} key={ingredient.name}>
+                                    <List>
+                                        <ListItem>
+                                            <Typography component="h1" variant="h1">{ingredient.name}</Typography>
+                                        </ListItem>
+                                        <ListItem>
+                                            <Typography>Amount: {ingredient.amount} {ingredient.unit}</Typography>
+                                        </ListItem>
+                                    </List>
+                                </Grid>
+                                ))}
+                            </Grid>
+                        </ListItem>
+                    </List>
+                </Grid>
             </Grid>
+            <div>
+        </div>
+  
         </Layout>
     );
 }
@@ -107,10 +143,13 @@ export async function getServerSideProps(context) {
   
     await db.connect();
     const product = await Product.findOne({ slug }).lean();
+    const masalaRecipeSlug = product.masalaRecipeSlug;
+    const masalarecipe = await MasalaRecipe.findOne({ masalaRecipeSlug}, {_id: 0, createdAt: 0, updatedAt: 0, __v: 0 });
     await db.disconnect();
     return {
       props: {
-        product: db.convertDocToObj(product),
+        product: db.convertProductDocToObj(product),
+        masalarecipe: db.convertMasalaRecipeDocToObj(masalarecipe),
       },
     };
   }
