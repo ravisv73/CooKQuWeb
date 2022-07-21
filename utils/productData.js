@@ -4,6 +4,7 @@ const productData = {
         {
             name: 'Paneer Butter Masala',
             slug: 'paneer-butter-masala',
+            recipeSlug: 'thalapakattu-briyani',
             masalaRecipeSlug: 'தலபாக்கட்டு-பிரியாணி-மசாலா-பேக்-Pocket',
             category: 'Side Dish',
             image: '/images/paneer_butter_masala.jpg',
@@ -18,6 +19,7 @@ const productData = {
         {
             name: 'Thalapakattu Chicken Briyani',
             slug: 'thalapakattu-briyani',
+            recipeSlug: 'thalapakattu-briyani',
             masalaRecipeSlug: 'தலபாக்கட்டு-பிரியாணி-மசாலா-பேக்-Pocket',
             category: 'Main Dish',
             image: '/images/thalapakattu_briyani.jpg',
@@ -32,6 +34,7 @@ const productData = {
         {
             name: 'A Vegetable fried rice',
             slug: 'veg-fried-rice',
+            recipeSlug: 'thalapakattu-briyani',
             masalaRecipeSlug: 'தலபாக்கட்டு-பிரியாணி-மசாலா-பேக்-Pocket',
             category: 'Main Dish',
             image: '/images/veg_fried_rice.jpg',
@@ -46,6 +49,7 @@ const productData = {
         {
             name: 'A Vegetable fried rice',
             slug: 'veg-fried-rice-1',
+            recipeSlug: 'thalapakattu-briyani',
             masalaRecipeSlug: 'தலபாக்கட்டு-பிரியாணி-மசாலா-பேக்-Pocket',
             category: 'Main Dish',
             image: '/images/veg_fried_rice.jpg',
@@ -60,6 +64,7 @@ const productData = {
         {
             name: 'Paneer Butter Masala',
             slug: 'paneer-butter-masala-1',
+            recipeSlug: 'thalapakattu-briyani',
             masalaRecipeSlug: 'தலபாக்கட்டு-பிரியாணி-மசாலா-பேக்-Pocket',
             category: 'Side Dish',
             image: '/images/paneer_butter_masala.jpg',
@@ -74,6 +79,7 @@ const productData = {
         {
             name: 'Thalapakattu Mutton Briyani',
             slug: 'thalapakattu-briyani-1',
+            recipeSlug: 'thalapakattu-briyani',
             masalaRecipeSlug: 'தலபாக்கட்டு-பிரியாணி-மசாலா-பேக்-Pocket',
             category: 'Main Dish',
             image: '/images/thalapakattu_briyani.jpg',
@@ -88,6 +94,7 @@ const productData = {
         {
             name: 'Paneer Butter Masala',
             slug: 'paneer-butter-masala-2',
+            recipeSlug: 'thalapakattu-briyani',
             masalaRecipeSlug: 'தலபாக்கட்டு-பிரியாணி-மசாலா-பேக்-Pocket',
             category: 'Side Dish',
             image: '/images/paneer_butter_masala.jpg',
@@ -102,6 +109,7 @@ const productData = {
         {
             name: 'A Vegetable fried rice',
             slug: 'veg-fried-rice-2',
+            recipeSlug: 'thalapakattu-briyani',
             masalaRecipeSlug: 'தலபாக்கட்டு-பிரியாணி-மசாலா-பேக்-Pocket',
             category: 'Main Dish',
             image: '/images/veg_fried_rice.jpg',
@@ -116,6 +124,7 @@ const productData = {
         {
             name: 'Thalapakattu Briyani',
             slug: 'thalapakattu-briyani-2',
+            recipeSlug: 'thalapakattu-briyani',
             masalaRecipeSlug: 'தலபாக்கட்டு-பிரியாணி-மசாலா-பேக்-Pocket',
             category: 'Main Dish',
             image: '/images/thalapakattu_briyani.jpg',

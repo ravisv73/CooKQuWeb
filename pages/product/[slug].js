@@ -55,6 +55,11 @@ export default function ProductScreen(props) {
                             <Typography>Description: {product.description}</Typography>
                         </ListItem>
                         <ListItem>
+                            <NextLink href={`/product/packing/${product.slug}`} passHref>
+                                <Link><Typography component="h2" variant="h2">Packing Instructions</Typography></Link>
+                            </NextLink>
+                        </ListItem>
+                        <ListItem>
                             <NextLink href={`/product/cooking/${product.slug}`} passHref>
                                 <Link><Typography component="h2" variant="h2">Cooking Instructions</Typography></Link>
                             </NextLink>

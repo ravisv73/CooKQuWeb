@@ -7,13 +7,13 @@ import { Button, Card, Grid, Link, List, ListItem, Typography } from '@material-
 import useStyles from '../../../utils/styles';
 import Image from 'next/image';
 import Product from '../../../models/product';
-import Cooking from '../../../models/cooking';
+import MasalaRecipe from '../../../models/masalarecipe';
 import db from '../../../utils/db';
 
 
 export default function CookingScreen(props) {
     const router = useRouter();
-    const {product, cooking} = props;
+    const {product, masalarecipe} = props;
     const classes = useStyles();
     //const {slug} = router.query;
     //const product = data.products.find((a) => a.slug === slug);
@@ -50,28 +50,27 @@ export default function CookingScreen(props) {
                 <Grid item md={12} xs={24}>
                     <List>
                         <ListItem>
-                            <Typography component="h3" variant="h3">{cooking.name}</Typography>
+                            <Typography component="h3" variant="h3">{masalarecipe.name}</Typography>
+                        </ListItem>
+                        <ListItem>
+                            <Typography>Category: {masalarecipe.category}</Typography>
+                        </ListItem>
+                        <ListItem>
+                            <Typography>Description: {masalarecipe.description}</Typography>
+                        </ListItem>
+                        <ListItem>
+                            <Typography component="h1" variant="h1">Ingredients</Typography>
                         </ListItem>
                         <ListItem>
                             <Grid>
-                                {cooking.groups.map((group) => (
-                                <Grid item md={12} key={group.title}>
+                                {masalarecipe.ingredients.map((ingredient) => (
+                                <Grid item md={12} key={ingredient.name}>
                                     <List>
                                         <ListItem>
-                                            <Typography component="h1" variant="h1">{group.title} </Typography>
+                                            <Typography component="h1" variant="h1">{ingredient.name}</Typography>
                                         </ListItem>
                                         <ListItem>
-                                            <Grid>
-                                                {group.steps.map((step) => (
-                                                <Grid item md={12} key={step.step}>
-                                                    <List>
-                                                        <ListItem>
-                                                            <Typography>{step.step} : {step.instruction} </Typography>
-                                                        </ListItem>
-                                                    </List>
-                                                </Grid>
-                                                ))}
-                                            </Grid>
+                                            <Typography>Amount: {ingredient.amount} {ingredient.unit}</Typography>
                                         </ListItem>
                                     </List>
                                 </Grid>
@@ -94,13 +93,13 @@ export async function getServerSideProps(context) {
     console.log("Slug: ", slug);
     await db.connect();
     const product = await Product.findOne({ slug }).lean();
-    const recipeSlug = product.recipeSlug;
-    const cooking = await Cooking.findOne({ recipeSlug}, {_id: 0, createdAt: 0, updatedAt: 0, __v: 0 });
+    const masalaRecipeSlug = product.masalaRecipeSlug;
+    const masalarecipe = await MasalaRecipe.findOne({ masalaRecipeSlug}, {_id: 0, createdAt: 0, updatedAt: 0, __v: 0 });
     await db.disconnect();
     return {
       props: {
         product: db.convertProductDocToObj(product),
-        cooking: db.convertCookingDocToObj(cooking),
+        masalarecipe: db.convertMasalaRecipeDocToObj(masalarecipe),
       },
     };
   }

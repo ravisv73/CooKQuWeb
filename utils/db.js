@@ -57,11 +57,11 @@ function convertMasalaRecipeDocToObj(doc) {
     newDoc.category = doc.category;
     newDoc.image = doc.image;
     newDoc.description = doc.description;
-    newDoc.ingredients = doc.ingredients.map(serializeObj);
+    newDoc.ingredients = doc.ingredients.map(serializeIngredientObj);
     return newDoc;
 }
 
-function serializeObj(item) {
+function serializeIngredientObj(item) {
     const newItem = {};
     newItem.name = item.name;
     newItem.amount = item.amount;
@@ -78,7 +78,31 @@ function convertProductDocToObj(doc) {
     return doc;
 }
 
+function convertCookingDocToObj(doc) {
+    const newDoc = {};
+    newDoc.name = doc.name;
+    newDoc.slug = doc.slug;
+    newDoc.category = doc.category;
+    newDoc.image = doc.image;
+    newDoc.description = doc.description;
+    newDoc.groups = doc.groups.map(serializeGroupObj);
+    return newDoc;
+}
 
-const db = {connect, disconnect, convertProductDocToObj, convertMasalaRecipeDocToObj};
+function serializeGroupObj(item) {
+    const newItem = {};
+    newItem.title = item.title;
+    newItem.steps = item.steps.map(serializeStepObj);
+    return newItem;
+}
+
+function serializeStepObj(item) {
+    const newItem = {};
+    newItem.step = item.step;
+    newItem.instruction = item.instruction;
+    return newItem;
+}
+
+const db = {connect, disconnect, convertProductDocToObj, convertMasalaRecipeDocToObj, convertCookingDocToObj};
 
 export default db;
