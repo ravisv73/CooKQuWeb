@@ -66,7 +66,9 @@ export default function CookingScreen(props) {
                                                 <Grid item md={12} key={step.step}>
                                                     <List>
                                                         <ListItem>
-                                                            <Typography>{step.step} : {step.instruction} </Typography>
+                                                            <div style={{ whiteSpace: 'pre-wrap' }}>
+                                                                <Typography>{step.step} : {step.instruction}</Typography>
+                                                            </div>
                                                         </ListItem>
                                                     </List>
                                                 </Grid>
