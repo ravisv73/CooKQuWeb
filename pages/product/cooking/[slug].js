@@ -41,16 +41,7 @@ export default function CookingScreen(props) {
                     <Card>
                         <List>
                             <ListItem>
-                                <Grid container>
-                                    <Grid item xs={6}><Typography>Price</Typography></Grid>
-                                    <Grid item xs={6}><Typography>Rs.{product.price}/-</Typography></Grid>
-                                </Grid>
-                            </ListItem>
-                            <ListItem>
-                                <Grid container>
-                                    <Grid item xs={6}><Typography>Status</Typography></Grid>
-                                    <Grid item xs={6}><Typography>{product.status}</Typography></Grid>
-                                </Grid>
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/X5_FFdc8yQg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </ListItem>
                             <ListItem>
                                 <Button fullWidth variant="contained" color="primary">
