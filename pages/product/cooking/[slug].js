@@ -38,7 +38,6 @@ export default function CookingScreen(props) {
                     </Image>
                 </Grid>
                 <Grid item md={6} xs={12}>
-                    
                     <Card>
                         <List>
                             <ListItem>
