@@ -11,11 +11,25 @@ import db from '../../utils/db';
 
 
 export default function ProductScreen(props) {
+    const [servings, setServings] = React.useState(2);
     const router = useRouter();
     const {product} = props;
     const classes = useStyles();
     //const {slug} = router.query;
     //const product = data.products.find((a) => a.slug === slug);
+
+    function incrementServings() {
+        setServings(servings + 1);
+      }
+
+      function decrementServings() {
+        if (servings == 2) {
+            setServings(2);
+            return;
+        }
+        setServings(servings - 1);
+    }
+
     if (!product){
         return <div>Product Not Found</div>
     }
@@ -54,12 +68,12 @@ export default function ProductScreen(props) {
                             <Typography>Description: {product.description}</Typography>
                         </ListItem>
                         <ListItem>
-                            <NextLink href={`/product/packing/${product.slug}?servings=2`} passHref>
+                            <NextLink href={`/product/packing/${product.slug}?servings=${servings}`} passHref>
                                 <Link><Typography component="h2" variant="h2">Packing Instructions</Typography></Link>
                             </NextLink>
                         </ListItem>
                         <ListItem>
-                            <NextLink href={`/product/cooking/${product.slug}?servings=2`} passHref>
+                            <NextLink href={`/product/cooking/${product.slug}?servings=${servings}`} passHref>
                                 <Link><Typography component="h2" variant="h2">Cooking Instructions</Typography></Link>
                             </NextLink>
                         </ListItem>
@@ -70,6 +84,22 @@ export default function ProductScreen(props) {
                 <Grid item md={3} xs={12}>
                     <Card>
                         <List>
+                            <ListItem>
+                                <Grid container>
+                                        <Grid item xs={6}><Typography >Servings: {servings}  </Typography></Grid>
+                                        <Grid item xs={6}>
+                                            <div>
+                                                <Button  onClick={incrementServings} variant="contained" color="primary">
+                                                    <Typography> + </Typography>
+                                                </Button>
+                                                <Button  onClick={decrementServings} variant="contained" color="primary">
+                                                    <Typography> - </Typography>
+                                                </Button>
+                                            </div>
+                                        </Grid>
+                                </Grid>
+                            </ListItem>
+                            <ListItem><Typography>Minimum Servings to order is 2 </Typography></ListItem>
                             <ListItem>
                                 <Grid container>
                                     <Grid item xs={6}><Typography>Price</Typography></Grid>
