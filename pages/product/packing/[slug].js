@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router'
 import React from 'react'
-import data from '../../../utils/data';
 import Layout from '../../../components/Layout';
 import NextLink from 'next/link'
 import { Button, Card, Grid, Link, List, ListItem, Typography } from '@material-ui/core';
@@ -11,9 +10,13 @@ import MasalaRecipe from '../../../models/masalarecipe';
 import db from '../../../utils/db';
 
 
-export default function CookingScreen(props) {
+export default function PackingScreen(props) {
     const router = useRouter();
+    const params = router.query;
     const {product, masalarecipe} = props;
+    const servingsrequested = params.servings;
+    const servingUnitMeasure = masalarecipe.servings;
+    const servingCalc = servingsrequested / servingUnitMeasure;
     const classes = useStyles();
     //const {slug} = router.query;
     //const product = data.products.find((a) => a.slug === slug);
@@ -40,7 +43,7 @@ export default function CookingScreen(props) {
                 <Grid item md={6} xs={12}>
                     <List>
                         <ListItem>
-                            <Typography component="h4" variant="h4">Cooking Video</Typography>
+                            <Typography component="h4" variant="h4">Packing Video</Typography>
                         </ListItem>
                         <ListItem>
                             <iframe width="560" height="315" src="https://www.youtube.com/embed/X5_FFdc8yQg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -59,6 +62,12 @@ export default function CookingScreen(props) {
                             <Typography>Description: {masalarecipe.description}</Typography>
                         </ListItem>
                         <ListItem>
+                            <Typography component="h2" variant="h2">Masala Unit Measure:  {servingUnitMeasure} servings </Typography>
+                        </ListItem>
+                        <ListItem>
+                            <Typography component="h2" variant="h2">Masala recalculated for: {servingsrequested} servings  </Typography>
+                        </ListItem>   
+                        <ListItem>
                             <Typography component="h1" variant="h1">Ingredients</Typography>
                         </ListItem>
                         <ListItem>
@@ -70,7 +79,7 @@ export default function CookingScreen(props) {
                                             <Typography component="h1" variant="h1">{ingredient.name}</Typography>
                                         </ListItem>
                                         <ListItem>
-                                            <Typography>Amount: {ingredient.amount} {ingredient.unit}</Typography>
+                                            <Typography>Amount: {ingredient.amount * servingCalc} {ingredient.unit}</Typography>
                                         </ListItem>
                                     </List>
                                 </Grid>
@@ -90,11 +99,11 @@ export default function CookingScreen(props) {
 export async function getServerSideProps(context) {
     const { params } = context;
     const { slug } = params;
-    console.log("Slug: ", slug);
     await db.connect();
     const product = await Product.findOne({ slug }).lean();
     const masalaRecipeSlug = product.masalaRecipeSlug;
     const masalarecipe = await MasalaRecipe.findOne({ masalaRecipeSlug}, {_id: 0, createdAt: 0, updatedAt: 0, __v: 0 });
+    console.log("MasalaRecipe: ", masalarecipe);
     await db.disconnect();
     return {
       props: {

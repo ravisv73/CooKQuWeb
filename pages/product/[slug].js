@@ -7,13 +7,12 @@ import { Button, Card, Grid, Link, List, ListItem, Typography } from '@material-
 import useStyles from '../../utils/styles';
 import Image from 'next/image';
 import Product from '../../models/product';
-import MasalaRecipe from '../../models/masalarecipe';
 import db from '../../utils/db';
 
 
 export default function ProductScreen(props) {
     const router = useRouter();
-    const {product, masalarecipe} = props;
+    const {product} = props;
     const classes = useStyles();
     //const {slug} = router.query;
     //const product = data.products.find((a) => a.slug === slug);
@@ -55,12 +54,12 @@ export default function ProductScreen(props) {
                             <Typography>Description: {product.description}</Typography>
                         </ListItem>
                         <ListItem>
-                            <NextLink href={`/product/packing/${product.slug}`} passHref>
+                            <NextLink href={`/product/packing/${product.slug}?servings=2`} passHref>
                                 <Link><Typography component="h2" variant="h2">Packing Instructions</Typography></Link>
                             </NextLink>
                         </ListItem>
                         <ListItem>
-                            <NextLink href={`/product/cooking/${product.slug}`} passHref>
+                            <NextLink href={`/product/cooking/${product.slug}?servings=2`} passHref>
                                 <Link><Typography component="h2" variant="h2">Cooking Instructions</Typography></Link>
                             </NextLink>
                         </ListItem>
@@ -105,13 +104,10 @@ export async function getServerSideProps(context) {
   
     await db.connect();
     const product = await Product.findOne({ slug }).lean();
-    const masalaRecipeSlug = product.masalaRecipeSlug;
-    const masalarecipe = await MasalaRecipe.findOne({ masalaRecipeSlug}, {_id: 0, createdAt: 0, updatedAt: 0, __v: 0 });
     await db.disconnect();
     return {
       props: {
         product: db.convertProductDocToObj(product),
-        masalarecipe: db.convertMasalaRecipeDocToObj(masalarecipe),
       },
     };
   }

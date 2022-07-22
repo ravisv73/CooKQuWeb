@@ -13,6 +13,7 @@ import db from '../../../utils/db';
 
 export default function CookingScreen(props) {
     const router = useRouter();
+    const params = router.query;
     const {product, cooking} = props;
     const classes = useStyles();
     //const {slug} = router.query;
@@ -52,6 +53,9 @@ export default function CookingScreen(props) {
                         <ListItem>
                             <Typography component="h3" variant="h3">{cooking.name}</Typography>
                         </ListItem>
+                        <ListItem>
+                            <Typography component="h1" variant="h1">Servings: {params.servings}  </Typography>
+                        </ListItem>                                        
                         <ListItem>
                             <Grid>
                                 {cooking.groups.map((group) => (
@@ -97,7 +101,7 @@ export async function getServerSideProps(context) {
     await db.connect();
     const product = await Product.findOne({ slug }).lean();
     const recipeSlug = product.recipeSlug;
-    const cooking = await Cooking.findOne({ recipeSlug}, {_id: 0, createdAt: 0, updatedAt: 0, __v: 0 });
+    const cooking = await Cooking.findOne({recipeSlug}, {_id: 0, createdAt: 0, updatedAt: 0, __v: 0 }).lean();
     await db.disconnect();
     return {
       props: {

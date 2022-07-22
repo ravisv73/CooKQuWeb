@@ -57,6 +57,10 @@ function convertMasalaRecipeDocToObj(doc) {
     newDoc.category = doc.category;
     newDoc.image = doc.image;
     newDoc.description = doc.description;
+    newDoc.servings = doc.servings;
+    newDoc.meatWeight = doc.meatWeight;
+    newDoc.riceWeight = doc.riceWeight;
+    newDoc.weightUnit = doc.weightUnit;
     newDoc.ingredients = doc.ingredients.map(serializeIngredientObj);
     return newDoc;
 }
