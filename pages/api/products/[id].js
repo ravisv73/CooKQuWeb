@@ -6,9 +6,9 @@ const handler = nc();
 
 handler.get(async(req,res) => {
     await db.connect();
-    const products = await Product.find({  }, {_id: 1, createdAt: 0, updatedAt: 0, __v: 0 }).lean();
+    const product = await Product.findById(req.query.id, {_id: 1, createdAt: 0, updatedAt: 0, __v: 0 });
     await db.disconnect();
-    res.send(products)
+    res.send(product)
 })
 
 export default handler;

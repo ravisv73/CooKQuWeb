@@ -100,7 +100,7 @@ export async function getServerSideProps(context) {
     const { params } = context;
     const { slug } = params;
     await db.connect();
-    const product = await Product.findOne({ slug }).lean();
+    const product = await Product.findOne({ slug }, {_id: 1, createdAt: 0, updatedAt: 0, __v: 0 }).lean();
     const masalaRecipeSlug = product.masalaRecipeSlug;
     const masalarecipe = await MasalaRecipe.findOne({ masalaRecipeSlug}, {_id: 0, createdAt: 0, updatedAt: 0, __v: 0 });
     console.log("MasalaRecipe: ", masalarecipe);

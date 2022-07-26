@@ -40,7 +40,7 @@ export default function Home(props) {
 
 export async function getServerSideProps() {
   await db.connect();
-  const products = await Product.find({}).lean();
+  const products = await Product.find({  }, {_id: 1, createdAt: 0, updatedAt: 0, __v: 0 }).lean();
   await db.disconnect();
   return {
     props : {

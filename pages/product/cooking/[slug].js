@@ -99,7 +99,7 @@ export async function getServerSideProps(context) {
     const { slug } = params;
     console.log("Slug: ", slug);
     await db.connect();
-    const product = await Product.findOne({ slug }).lean();
+    const product = await Product.findOne({ slug }, {_id:1, createdAt: 0, updatedAt: 0, __v: 0 }).lean();
     const recipeSlug = product.recipeSlug;
     const cooking = await Cooking.findOne({recipeSlug}, {_id: 0, createdAt: 0, updatedAt: 0, __v: 0 }).lean();
     await db.disconnect();

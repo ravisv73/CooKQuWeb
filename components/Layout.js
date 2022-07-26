@@ -1,15 +1,20 @@
-import React, { useContext } from 'react';
+import React, { Suspense, useContext, Spinner } from 'react';
 import Head from 'next/head';
 import NextLink from 'next/link';
-import { AppBar, Toolbar, Typography, Container, Link, CssBaseline, createTheme, MuiThemeProvider, Switch } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, Container, Link, CssBaseline, createTheme, MuiThemeProvider, Switch, Badge } from '@material-ui/core';
 import useStyles from '../utils/styles';
 import { Store } from '../utils/Store';
 import Cookies from 'js-cookie';
-import Image from 'next/image';
+import AppToolbar from './AppToolbar';
 
 export default function Layout({title, description, children}) {
     const {state, dispatch} = useContext(Store);
-    const {darkMode} = state;
+    const {darkMode, cart} = state;
+    console.log('darkMode: ', darkMode);    
+    console.log('cart: ', cart);
+    // This component is loaded dynamically
+    //const AppToolbar = React.lazy(() => import('./AppToolbar'));
+
     const theme = createTheme  ({
         typography: {
             h1: {
@@ -51,21 +56,11 @@ export default function Layout({title, description, children}) {
         <MuiThemeProvider theme={theme}>
             <CssBaseline />
             <AppBar position="static" className={classes.navbar}>
-                <Toolbar>
-                    <NextLink href="/" passHref>
-                        <Link>
-                            <Typography className={classes.brand}>Cook Quick and Easy</Typography>
-                        </Link>
-                    </NextLink>
-                    <div className={classes.grow}></div>
-                    <Switch checked={darkMode} onChange={darkModeChangeHandler}></Switch>
-                    <NextLink href="/cart" passHref>
-                        <Link>Cart</Link>
-                    </NextLink>
-                    <NextLink href="/login" passHref>
-                        <Link>Login</Link>
-                    </NextLink>
-                </Toolbar>
+                <Suspense fallback={<Spinner />}>
+                    <div>
+                        <AppToolbar></AppToolbar>
+                    </div>
+                </Suspense>
             </AppBar>
             <Container className={classes.main}>
                 {children}

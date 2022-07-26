@@ -1,6 +1,6 @@
-import { useRouter } from 'next/router'
-import React from 'react'
-import data from '../../utils/data';
+//import { useRouter } from 'next/router'
+import React, { useContext }  from 'react'
+//import data from '../../utils/data';
 import Layout from '../../components/Layout';
 import NextLink from 'next/link'
 import { Button, Card, Grid, Link, List, ListItem, Typography } from '@material-ui/core';
@@ -8,15 +8,26 @@ import useStyles from '../../utils/styles';
 import Image from 'next/image';
 import Product from '../../models/product';
 import db from '../../utils/db';
-
+import {Store} from '../../utils/Store';
+import axios from 'axios';
 
 export default function ProductScreen(props) {
+    const {dispatch} = useContext(Store);
     const [servings, setServings] = React.useState(2);
-    const router = useRouter();
+    //const router = useRouter();
     const {product} = props;
     const classes = useStyles();
     //const {slug} = router.query;
     //const product = data.products.find((a) => a.slug === slug);
+
+    const addToCartHandler = async () => {
+        const {data} = await axios.get(`/api/products/${product._id}`);
+        if(data.countInStock <=0 ) {
+            window.alert('Sorry, Product is out of stock');
+            return;
+        }
+        dispatch ({type: 'CART_ADD_ITEM', payload: {...product, quantity: 1 } });
+    }
 
     function incrementServings() {
         setServings(servings + 1);
@@ -113,7 +124,7 @@ export default function ProductScreen(props) {
                                 </Grid>
                             </ListItem>
                             <ListItem>
-                                <Button fullWidth variant="contained" color="primary">
+                                <Button fullWidth variant="contained" color="primary" onClick={addToCartHandler}>
                                     Add to cart
                                 </Button>
                             </ListItem>
@@ -133,7 +144,7 @@ export async function getServerSideProps(context) {
     const { slug } = params;
   
     await db.connect();
-    const product = await Product.findOne({ slug }).lean();
+    const product = await Product.findOne({ slug }, {_id: 1, createdAt: 0, updatedAt: 0, __v: 0 }).lean();
     await db.disconnect();
     return {
       props: {

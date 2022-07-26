@@ -1,11 +1,7 @@
 import mongoose from "mongoose";
 
-
-
 const connection = {};
 
-// Get BSON parser class
-const BSON = require('bson-ext')
 
 async function connect() {
     console.log('making attempts to connect');
@@ -77,8 +73,8 @@ function serializeIngredientObj(item) {
 
 function convertProductDocToObj(doc) {
     doc._id = doc._id.toString();
-    doc.createdAt = doc.createdAt.toString();
-    doc.updatedAt = doc.updatedAt.toString();  
+    //doc.createdAt = doc.createdAt.toString();
+    //doc.updatedAt = doc.updatedAt.toString();  
     return doc;
 }
 
