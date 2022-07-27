@@ -13,6 +13,7 @@ const productSchema = new mongoose.Schema({
     cuisine: {type: String, required: true},
     rating: {type: String, required: true, default: 0},
     numReviews: {type: String, required: true, default: 0},
+    countInStock: {type: Number, required: true, default: 0},
     status: {type: String, required: true, default: 'Not Available'},
     description: {type: String, required: true},
 }, {

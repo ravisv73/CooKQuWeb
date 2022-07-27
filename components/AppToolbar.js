@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import NextLink from 'next/link';
-import { Toolbar, Typography, Container, Link, CssBaseline, createTheme, MuiThemeProvider, Switch, Badge } from '@material-ui/core';
+import { Toolbar, Typography, Container, Grid, Link, CssBaseline, createTheme, MuiThemeProvider, Switch, Badge } from '@material-ui/core';
 import useStyles from '../utils/styles';
 import { Store } from '../utils/Store';
 import Cookies from 'js-cookie';
@@ -13,7 +13,8 @@ export default function AppToolbar({title, description, children}) {
     if (cart.cartItems.length > 0) {
         numItemsCart = cart.cartItems.length;
     }
-
+    // The element for darkmode
+    // <Switch checked={darkMode} onChange={darkModeChangeHandler}></Switch>
     const classes = useStyles();  
  
     const [hasMounted, setHasMounted] = React.useState(false);
@@ -39,14 +40,13 @@ export default function AppToolbar({title, description, children}) {
                 </Link>
             </NextLink>
             <div className={classes.grow}></div>
-                <Switch checked={darkMode} onChange={darkModeChangeHandler}></Switch>
-                <NextLink href="/cart" passHref>
+                <NextLink href="/order/cart" passHref>
                     <Link>
-                        {numItemsCart > 0 ? <Badge color = "secondary" badgeContent={numItemsCart}> Cart</Badge>  : 'Cart'}
+                    <Typography component="h2" variant="h2">{numItemsCart > 0 ? <Badge color = "secondary" badgeContent={numItemsCart}> Cart </Badge>  : 'Cart '}</Typography>
                     </Link>
                 </NextLink>
                 <NextLink href="/login" passHref>
-                    <Link>Login</Link>
+                    <Link><Typography component="h2" variant="h2">Login</Typography></Link>
                 </NextLink>
         </Toolbar>
     </div>
