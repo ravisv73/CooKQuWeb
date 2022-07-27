@@ -1,3 +1,4 @@
+import React, {useContext} from 'react';
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
@@ -8,9 +9,27 @@ import data from '../utils/data';
 import { ReceiptRounded } from '@mui/icons-material'
 import db from '../utils/db'
 import Product from '../models/product'
+import { Store } from '..//utils/Store';
+import axios from 'axios';
+import {useRouter} from 'next/router';
 
 export default function Home(props) {
+  const router = useRouter();
   const {products} = props;
+  const {state, dispatch} = useContext(Store);
+
+  const addToCartHandler = async (product) => {
+    const existItem = state.cart.cartItems.find(x=>x._id === product._id);
+    const quantity = existItem ? existItem.quantity+1: 1;
+    const {data} = await axios.get(`/api/products/${product._id}`);
+    if(data.countInStock < quantity ) {
+      window.alert('Sorry, Product is out of stock');
+      return;
+  }
+    dispatch ({type: 'CART_ADD_ITEM', payload: {...product, quantity } });
+    router.push('/order/cart');
+  };
+
   return (
     <Layout>
       <div>
@@ -27,7 +46,7 @@ export default function Home(props) {
                   </NextLink>
                   <CardActions>
                     <Typography>Rs.{product.price}/-</Typography>
-                    <Button size="small" color="primary">Add to cart</Button>
+                    <Button size="small" color="primary" onClick={() => addToCartHandler(product)}>Add to cart</Button>
                   </CardActions>
                 </Card> 
               </Grid>
