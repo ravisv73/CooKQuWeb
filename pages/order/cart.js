@@ -32,7 +32,7 @@ export default function CartScreen() {
         ) :
         (
             <Grid container spacing={1}>
-                <Grid item md={9} xs={10}>
+                <Grid item md={9} xs={15}>
                     <TableContainer>
                         <Table>
                             <TableHead>
