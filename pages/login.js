@@ -1,11 +1,18 @@
-import { Button, Link, List, ListItem, TextField, Typography } from "@material-ui/core";
+import {
+  Button,
+  Link,
+  List,
+  ListItem,
+  TextField,
+  Typography,
+} from "@material-ui/core";
 import NextLink from "next/link";
 import React, { Fragment } from "react";
 import Layout from "../components/Layout";
 import useStyles from "../utils/styles";
 
 export default function Login() {
-    const classes = useStyles();
+  const classes = useStyles();
   return (
     <Layout title="Login">
       <form className={classes.form}>
@@ -19,7 +26,7 @@ export default function Login() {
               fullWidth
               id="email"
               label="Email"
-              inputProps={{type: 'email'}}
+              inputProps={{ type: "email" }}
             ></TextField>
           </ListItem>
           <ListItem>
@@ -28,14 +35,19 @@ export default function Login() {
               fullWidth
               id="password"
               label="Password"
-              inputProps={{type: 'password'}}
+              inputProps={{ type: "password" }}
             ></TextField>
           </ListItem>
           <ListItem>
-            <Button variant="contained" type="submit" fullWidth color="primary">Login</Button>
+            <Button variant="contained" type="submit" fullWidth color="primary">
+              Login
+            </Button>
           </ListItem>
           <ListItem>
-            Don't have an account? <Fragment>&nbsp;</Fragment> <NextLink href="/register" passHref><Link>Register</Link></NextLink>
+            Do not have an account? <Fragment>&nbsp;</Fragment>{" "}
+            <NextLink href="/register" passHref>
+              <Link>Register</Link>
+            </NextLink>
           </ListItem>
         </List>
       </form>
