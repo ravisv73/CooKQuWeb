@@ -1,5 +1,20 @@
+import bcrypt from 'bcrypt.js'
 
 const data = {
+    users: [
+        {
+            name: 'Ravisankar Varadarajan',
+            email: 'ravisv73@gmail.com',
+            password: bcrypt.hasSync('12345'),
+            isAdmin: true,
+        },
+        {
+            name: 'Vishnuchakravarthy Varadarajan',
+            email: 'vishnu_chak@yahoo.com',
+            password: bcrypt.hasSync('12345'),
+            isAdmin: false,
+        },
+    ],
     products: [
         {
             name: 'Paneer Butter Masala',

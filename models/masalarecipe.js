@@ -7,7 +7,7 @@ const ingredientSchema = new mongoose.Schema({
     description: {type: String, required: true},
   });
 
-const Ingredient = mongoose.models.Ingredient || mongoose.model('Ingredient', ingredientSchema);
+//const Ingredient = mongoose.models.Ingredient || mongoose.model('Ingredient', ingredientSchema);
 
 
 const masalaRecipeSchema = new mongoose.Schema({

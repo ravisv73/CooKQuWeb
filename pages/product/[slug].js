@@ -6,7 +6,7 @@ import NextLink from 'next/link'
 import { Button, Card, Grid, Link, List, ListItem, Typography } from '@material-ui/core';
 import useStyles from '../../utils/styles';
 import Image from 'next/image';
-import Product from '../../models/product';
+import Product from '../../models/Product';
 import db from '../../utils/db';
 import {Store} from '../../utils/Store';
 import axios from 'axios';
@@ -23,13 +23,13 @@ export default function ProductScreen(props) {
     //const product = data.products.find((a) => a.slug === slug);
 
     const addToCartHandler = async () => {
-        const existItem = state.cart.cartItems.find(x=>x._id === product._id);
-        const quantity = existItem ? existItem.quantity+1: 1;
         const {data} = await axios.get(`/api/products/${product._id}`);
         if(data.countInStock < quantity ) {
             window.alert('Sorry, Product is out of stock');
             return;
         }
+        const existItem = state.cart.cartItems.find(x=>x._id === product._id);
+        const quantity = existItem ? existItem.quantity+1: 1;
         dispatch ({type: 'CART_ADD_ITEM', payload: {...product, quantity } });
         router.push('/order/cart');
     }
