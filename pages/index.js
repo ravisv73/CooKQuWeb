@@ -19,7 +19,7 @@ import {
 import data from "../utils/data";
 import { ReceiptRounded } from "@mui/icons-material";
 import db from "../utils/db";
-import Product from "../models/Product";
+import Product from "../models/product";
 import { Store } from "../utils/Store";
 import axios from "axios";
 import { useRouter } from "next/router";
