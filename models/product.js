@@ -18,6 +18,7 @@ const productSchema = new mongoose.Schema(
     status: { type: String, required: true, default: "Not Available" },
     description: { type: String, required: true },
     version: { type: Number, required: true },
+    versionStatus: { type: String, required: true },
     release: { type: String, required: true },
     releaseStatus: { type: String, required: true },
   },

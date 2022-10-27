@@ -21,19 +21,20 @@ handler.get(async (req, res) => {
   //await Product.deleteMany();
 
   let currentProducts = await Product.find(
-    { releaseStatus: "Current" },
+    { versionStatus: "Current", releaseStatus: "Current" },
     { _id: 0 }
   );
 
   await Product.updateMany(
-    { releaseStatus: "Current" },
-    { $set: { releaseStatus: "Archived" } }
+    { versionStatus: "Current", releaseStatus: "Current" },
+    { $set: { versionStatus: "Archived", releaseStatus: "Archived" } }
   );
 
   console.log("New Products before..", newProducts);
   currentProducts.forEach((currentProduct) => {
     let newProduct = JSON.parse(JSON.stringify(currentProduct));
     newProduct.version = newProduct.version + 1;
+    newProduct.versionStatus = "Current";
     newProduct.release = currentRelease.release;
     newProduct.releaseStatus = currentRelease.status;
     newProducts.push(newProduct);
