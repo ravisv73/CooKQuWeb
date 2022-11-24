@@ -56,7 +56,7 @@ export default function Home(props) {
                     </CardContent>
                     <CardMedia
                       component="img"
-                      image={product.image}
+                      image={`/images/${product.image}`}
                       title={product.name}
                     ></CardMedia>
                   </CardActionArea>

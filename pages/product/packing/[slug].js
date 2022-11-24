@@ -34,7 +34,7 @@ export default function PackingScreen(props) {
       <Grid container spacing={1}>
         <Grid item md={4} xs={6}>
           <Image
-            src={product.image}
+            src={`/images/${product.image}`}
             alt={product.name}
             width={50}
             height={50}
